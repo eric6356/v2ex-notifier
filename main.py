@@ -17,7 +17,7 @@ from oauth2client.file import Storage
 SCOPES = 'https://www.googleapis.com/auth/gmail.send'
 NOTI_URL = os.environ.get('NOTI_URL')
 BASE_DIR = os.environ.get('BASE_DIR', os.getcwd())
-TO = os.environ.get('TO')
+RECEIVER = os.environ.get('RECEIVER')
 
 
 def get_credentials():
@@ -52,7 +52,7 @@ def create_message(entry):
     """
     html = '{0}<br><a style="font-size: 85%; color: gray;" href={1}>{1}</a>'.format(entry.summary, entry.link)
     message = MIMEText(html, 'html')
-    message['to'] = TO
+    message['to'] = RECEIVER
     message['from'] = 'V2EX-NOTI'
     subject = entry.title or '{} 感谢了你'.format(entry.author)
     message['subject'] = '[V2EX-NOTI] {}'.format(subject)
